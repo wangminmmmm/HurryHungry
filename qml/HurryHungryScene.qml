@@ -34,7 +34,7 @@ SceneBase {
     id: levelBackground
     anchors.horizontalCenter: parent.horizontalCenter
     y: parent.height-parent.gameWindowAnchorItem.height
-    sourceImage: "../assets/img/background-wood2.png"
+    sourceImage: "../assets/img/background-pure.png"
     mirrorSecondImage: false
     movementVelocity: Qt.point(0, level.levelMovementAnimation.velocity)
     running: level.levelMovementAnimation.running

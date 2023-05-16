@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 4.11.2, 2023-04-26T16:07:22. -->
+<!-- Written by QtCreator 4.11.2, 2023-05-16T11:43:43. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -330,8 +330,8 @@
     <value type="int" key="PE.EnvironmentAspect.Base">0</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">HurryHungry</value>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.AndroidRunConfiguration:/root/qt-my/hurryhungry/HurryHungry/HurryHungry.pro</value>
-    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/root/qt-my/hurryhungry/HurryHungry/HurryHungry.pro</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.AndroidRunConfiguration:/root/qt-my/hurryhungry/HurryHungry-d/HurryHungry/HurryHungry.pro</value>
+    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/root/qt-my/hurryhungry/HurryHungry-d/HurryHungry/HurryHungry.pro</value>
     <value type="QString" key="RunConfiguration.Arguments"></value>
     <value type="bool" key="RunConfiguration.Arguments.multi">false</value>
     <value type="QString" key="RunConfiguration.OverrideDebuggerStartup"></value>

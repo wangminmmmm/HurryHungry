@@ -3,7 +3,7 @@ import Felgo 3.0
 
 
 EntityBase {
-  entityType: "coin"
+  entityType: "bread"
 
   poolingEnabled: true
 
@@ -12,10 +12,10 @@ EntityBase {
 
   Image {
     id: sprite
-    source: "../../assets/img/corn.png"
+    source: "../../assets/img/bread.png"
 
-    width: 7
-    height: 10
+    width: 21
+    height: 20
 
     anchors.centerIn: parent
   }

@@ -73,7 +73,7 @@ SceneBase {
     } if (grains >= 50) {
       gameNetwork.unlockAchievement("grains50", true)
     } if (deaths >= 10){
-      gameNetwork.unlockAchievement("chickendead1", true)
+      gameNetwork.unlockAchievement("blackdead", true)
     }
 
 

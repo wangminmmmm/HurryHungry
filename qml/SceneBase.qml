@@ -3,8 +3,8 @@ import Felgo 3.0
 
 Scene {
   id: sceneBase
-  width: 320
-  height: 480
+  width: 350
+  height: 500
 
   visible: opacity>0
 

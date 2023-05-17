@@ -1,3 +1,5 @@
+
+
 import QtQuick 2.0
 import Felgo 3.0
 
@@ -21,7 +23,7 @@ Image {
     id: buttonText
     anchors.centerIn: parent
     font.pixelSize: 22
-    color: "#ca840a"
+    color: "#FFC9C9"
 
     font.family: fontHUD.name
   }

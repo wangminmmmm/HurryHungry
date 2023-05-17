@@ -69,9 +69,9 @@ GameWindow {
        descriptionAfterUnlocking: "Collected at least 50 grains in one game"
      },
      Achievement {
-       key: "chickendead1"
+       key: "balckdead"
        name: "Empty Henhouse"
-       iconSource: "../assets/img/achievement_chickendead.png"
+       iconSource: "../assets/img/achievement_blackdead.png"
        target: 10
        points: 15
        description: "The chicken dies 10 times in a row"
@@ -146,7 +146,7 @@ GameWindow {
     opacity: 0
   }
 
-  ChickenOutbreakScene {
+  HurryHungryScene {
     id: scene
      opacity: 0
     onVisibleChanged: console.debug("GameScene changed visible to", visible)
@@ -196,7 +196,7 @@ GameWindow {
       flurry.endTimedEvent("Display.Game");
 
 
-      flurry.logEvent("Game.Finished", { "score": lastScore, "collectedCorns" : player.bonusScore, "scoreForCorns": player.bonusScore*player.bonusScoreForCoin })
+      flurry.logEvent("Game.Finished", { "score": lastScore, "collectedBread" : player.bonusScore, "scoreForBread": player.bonusScore*player.bonusScoreForBread })
 
     } else if(lastActiveState === "gameOver") {
       flurry.endTimedEvent("Display.GameOver");

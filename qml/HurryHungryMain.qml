@@ -31,7 +31,7 @@ GameWindow {
   }
 
 
-  FelgoGameNetwork {
+  FelgoGameNetwork {                  //调用 最高分qml
    id: gameNetwork
 
    gameId: 1
@@ -74,8 +74,8 @@ GameWindow {
        iconSource: "../assets/img/achievement_blackdead.png"
        target: 10
        points: 15
-       description: "The chicken dies 10 times in a row"
-       descriptionAfterUnlocking: "The chicken died 10 times in a row"
+       description: "The balck dies 10 times in a row"
+       descriptionAfterUnlocking: "The black died 10 times in a row"
      }
    ]
 
@@ -108,37 +108,10 @@ GameWindow {
      }
    }
 
-    onFacebookSuccessfullyConnected: {
-     nativeUtils.displayMessageBox(qsTr("Facebook Connected"), qsTr("You just successfully connected to facebook, congrats!"))
-   }
-   onFacebookSuccessfullyDisconnected: {
-     nativeUtils.displayMessageBox(qsTr("Facebook Disconnected"), qsTr("You just successfully disconnected from facebook..."))
-   }
-   onFacebookConnectionError: {
-      nativeUtils.displayMessageBox(qsTr("Facebook Error"), JSON.stringify(error))
-   }
-
 
   }
 
 
-  Facebook {
-
-    id: facebook
-
-     appId: "624554907601397"
-
-    readPermissions: ["email", "read_friendlists"]
-    publishPermissions: ["publish_actions"]
-
-  }
-
-
-
-   Flurry {
-    id: flurry
-    apiKey: "9PH383W92BYDK6ZYVSDV"
-  }
 
 
    MainScene {
@@ -162,10 +135,6 @@ GameWindow {
      opacity: 0
   }
 
-  FelgoGameNetworkScene {
-    id: vplayGameNetworkScene
-    opacity: 0
-  }
 
    EntityManager {
     id: entityManager
@@ -177,7 +146,7 @@ GameWindow {
 
   onStateChanged: {
 
-    console.debug("ChickenBreakoutMain: changed state to", state)
+    console.debug("HunrryHungryMain: changed state to", state)
 
     if(state === "main")
       activeScene = mainScene;
@@ -187,41 +156,11 @@ GameWindow {
       activeScene = gameOverScene;
     else if(state === "credits")
       activeScene = creditsScene;
-    else if(state === "gameNetwork")
-      activeScene = vplayGameNetworkScene;
-
-    if(lastActiveState === "main") {
-      flurry.endTimedEvent("Display.Main");
-    } else if(lastActiveState === "game") {
-      flurry.endTimedEvent("Display.Game");
-
-
-      flurry.logEvent("Game.Finished", { "score": lastScore, "collectedBread" : player.bonusScore, "scoreForBread": player.bonusScore*player.bonusScoreForBread })
-
-    } else if(lastActiveState === "gameOver") {
-      flurry.endTimedEvent("Display.GameOver");
-    } else if(lastActiveState === "credits") {
-      flurry.endTimedEvent("Display.Credits");
-    } else if(lastActiveState === "gameNetwork") {
-        flurry.endTimedEvent("Display.FelgoGameNetwork");
-    }
-
-    if(state === "main") {
-      flurry.logTimedEvent("Display.Main");
-    } else if(state === "game") {
-      flurry.logTimedEvent("Display.Game");
-    } else if(state === "gameOver") {
-      flurry.logTimedEvent("Display.GameOver");
-    } else if(state === "credits") {
-      flurry.logTimedEvent("Display.Credits");
-    } else if(state === "gameNetwork") {
-      flurry.logTimedEvent("Display.FelgoGameNetwork");
-    }
 
     lastActiveState = state;
   }
 
-  state: "main"
+  state: "main"                 //场景状态
    states: [
     State {
       name: "main"
@@ -251,11 +190,6 @@ GameWindow {
     State {
       name: "credits"
       PropertyChanges { target: creditsScene; opacity: 1}
-    },
-    State {
-      name: "gameNetwork"
-      PropertyChanges { target: vplayGameNetworkScene; opacity: 1}
-
     }
   ]
 }

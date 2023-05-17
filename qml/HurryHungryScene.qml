@@ -1,7 +1,9 @@
 import QtQuick 2.0
 import Felgo 3.0
 import "entities"
-//this scene is playing scene
+
+//游戏场景
+
 SceneBase {
   id: scene
 
@@ -44,7 +46,7 @@ SceneBase {
     id: level
 
     onGameLost: {
-      console.debug("ChickenOutbreakScene: gameLost()");
+      console.debug("HurryHungryScene: gameLost()");
       level.stopGame();
       lastScore = player.totalScore;
       player.deaths++;
@@ -79,7 +81,11 @@ SceneBase {
       bottomMargin: 10
     }
   }
+<<<<<<< HEAD
 //wo can use mouse to control the player move
+=======
+
+>>>>>>> 4134f1f4cfdf5f28e512def46c8c404f2e55f56c
   MouseArea {
     anchors.fill: scene.gameWindowAnchorItem
     onPressed: {

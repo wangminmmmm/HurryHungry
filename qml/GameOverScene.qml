@@ -1,6 +1,6 @@
 import QtQuick 2.0
 import Felgo 3.0
-//this show gameo scene when you are die
+
 SceneBase {
 
   onBackButtonPressed: {

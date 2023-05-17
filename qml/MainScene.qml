@@ -12,7 +12,7 @@ SceneBase {
     nativeUtils.displayMessageBox(qsTr("Really quit the game?"), "", 2);
   }
 
-  Connections {
+ /* Connections {
       target: activeScene === mainScene ? nativeUtils : null
       onMessageBoxFinished: {
         console.debug("the user confirmed the Ok/Cancel dialog with:", accepted)
@@ -27,7 +27,7 @@ SceneBase {
         exitDialogShown = false
         vplayLinkShown = false
       }
-  }
+  }*/
 
   MultiResolutionImage {
     source: "../assets/img/mainMenuBackground.png"
@@ -48,6 +48,7 @@ SceneBase {
       text: qsTr("Highscore: ") + gameNetwork.userHighscoreForCurrentActiveLeaderboard
     }
 
+
     Item {
       width: 1
       height: 0
@@ -64,34 +65,6 @@ SceneBase {
       height: 25
     }    
 
-    MenuButton {
-      text: qsTr("Highscores")
-
-      width: 170 * 0.8
-      height: 60 * 0.8
-
-      onClicked: {
-        window.state = "gameNetwork"
-        gameNetwork.showLeaderboard()
-      }
-    }
-
-//    MenuButton {
-//      text: qsTr("Game Center")
-
-//      width: 170 * 0.8
-//      height: 60 * 0.8
-
-//      // this button opens the gamecenter leaderboards - only show it if the gamecenter is available (so iOS only)
-//      // still show the Game Center button, as on iOS it is also very popular!
-//      // on iOS VPGN and GameCenter both can be used together
-//      visible: gameCenter.authenticated
-
-//      onClicked: {
-//          flurry.logEvent("GameCenter.Show")
-//          gameCenter.showLeaderboard();
-//      }
-//    }
 
     MenuButton {
       text: qsTr("Credits")
@@ -117,32 +90,6 @@ SceneBase {
     }
   }
 
-  /*Image {
-   id: logo
-    anchors.right: mainScene.gameWindowAnchorItem.right
-    anchors.rightMargin: 10
-    anchors.bottom: mainScene.gameWindowAnchorItem.bottom
-    anchors.bottomMargin: 10
-    source: "../assets/img/felgo-logo.png"
-    fillMode: Image.PreserveAspectFit
-    height: 55
-
-    MouseArea {
-      anchors.fill: parent
-      onClicked: {
-        vplayLinkShown = true
-        flurry.logEvent("MainScene.ShowDialog.VPlayWeb")
-        nativeUtils.displayMessageBox(qsTr("Felgo"), qsTr("This game is built with Felgo. The source code is available in the free Felgo SDK - so you can build your own Chicken Outbreak in minutes! Visit Felgo.net now?"), 2)
-      }
-    }
-
-    SequentialAnimation {
-      running: true
-      loops: -1
-      NumberAnimation { target: logo; property: "opacity"; to: 0.1; duration: 1200 }
-      NumberAnimation { target: logo; property: "opacity"; to: 1; duration: 1200 }
-    }
-  }*/
 
   Keys.onReturnPressed: {
     window.state = "game"

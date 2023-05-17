@@ -2,6 +2,8 @@ import QtQuick 2.0
 import Felgo 3.0
 import "entities"
 
+//游戏场景
+
 SceneBase {
   id: scene
 
@@ -44,7 +46,7 @@ SceneBase {
     id: level
 
     onGameLost: {
-      console.debug("ChickenOutbreakScene: gameLost()");
+      console.debug("HurryHungryScene: gameLost()");
       level.stopGame();
       lastScore = player.totalScore;
       player.deaths++;
@@ -79,6 +81,7 @@ SceneBase {
       bottomMargin: 10
     }
   }
+
   MouseArea {
     anchors.fill: scene.gameWindowAnchorItem
     onPressed: {

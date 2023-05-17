@@ -7,7 +7,7 @@ var gridSizeHalf = scene.gridSize/2
 var newWindowTopleftPos = Qt.point(0,0)
 var roostUrl = Qt.resolvedUrl("../entities/Roost.qml")
 var coinUrl = Qt.resolvedUrl("../entities/Coin.qml")
-var windowUrl = Qt.resolvedUrl("../entities/HenhouseWindow.qml")
+
 var newElementProperties = {}
 
 function createRandomRowForRowNumber(rowNumber) {
@@ -68,15 +68,12 @@ function createRandomRowForRowNumber(rowNumber) {
         } else if(i < roostColumns-1 && randomValue < windowCreationProbability ) {
 
 
-            // the i<columns-1 check is required, because the window has a size of 2 grids, and its anchor is top left
 
-            //var newWindowTopleftPos = Qt.point(i*gridSize, rowNumber*gridSize);
-            // Performance optimization, do not provide properties as own object during runtime (garbarge)
             newWindowTopleftPos.x = i*gridSize
             newWindowTopleftPos.y = rowNumber*gridSize
 
             console.debug("newWindowTopleftPos.y-lastWindowY:", newWindowTopleftPos.y-lastWindowY)
-            // this avoids creating too many windows, so not possible to have more than 2 on a scene with this code!
+
             if(newWindowTopleftPos.y-lastWindowY < minimumWindowHeightDifference) {
                 console.debug("difference between last Window and current to create one too small!")
                 continue;
@@ -89,13 +86,6 @@ function createRandomRowForRowNumber(rowNumber) {
                 continue;
             }
 
-            //console.debug("creating a new Window... at position x:", newWindowTopleftPos.x, ", y:", newWindowTopleftPos.y, "lastWindowY:", lastWindowY);
-            // Performance optimization, do not provide properties as own object during runtime (garbarge)
-//            entityManager.createEntityFromUrlWithProperties(Qt.resolvedUrl("entities/HenhouseWindow.qml"),
-//                                 {"x": newWindowTopleftPos.x,
-//                                     "y": newWindowTopleftPos.y,
-//                                     "z": 0 // put behind all others, except the background
-//                                 });
             newElementProperties.x = newWindowTopleftPos.x
             newElementProperties.y = newWindowTopleftPos.y
             newElementProperties.z = 0 // put behind all others, except the background

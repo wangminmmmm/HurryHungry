@@ -58,6 +58,10 @@ Item {
       return;
 
     entityManager.createPooledEntitiesFromUrl(Qt.resolvedUrl("entities/Roost.qml"), 20);
+<<<<<<< HEAD
+    entityManager.createPooledEntitiesFromUrl(Qt.resolvedUrl("entities/HenhouseWindow.qml"), 5);
+=======
+>>>>>>> 4134f1f4cfdf5f28e512def46c8c404f2e55f56c
     entityManager.createPooledEntitiesFromUrl(Qt.resolvedUrl("entities/Bread.qml"), 10);
   }
 

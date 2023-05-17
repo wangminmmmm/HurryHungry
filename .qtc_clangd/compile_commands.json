@@ -7,7 +7,7 @@
         "-I",
         "/opt/Qt6.3.1/Tools/QtCreator/share/qtcreator/cplusplus/wrappedQtHeaders/QtCore",
         "-I",
-        "/tmp/QtCreator-mIqgTE/clang-uiheader-qnNLOK",
+        "/tmp/QtCreator-gDwhfV/clang-uiheader-EqtGRZ",
         "-nostdinc",
         "-nostdinc++",
         "-pipe",
@@ -24,7 +24,7 @@
         "-DQT_GUI_LIB",
         "-DQT_CORE_LIB",
         "-I",
-        "/root/open_project/HurryHungry/HurryHungry",
+        "/run/media/root/study/repository/HurryHungry",
         "-I",
         "/opt/Qt6.3.1/6.3.1/gcc_64/include",
         "-I",
@@ -55,9 +55,9 @@
         "-Wno-unknown-pragmas",
         "-Wno-unknown-warning-option",
         "-Wno-documentation-unknown-command",
-        "/root/open_project/HurryHungry/HurryHungry/main.cpp"
+        "/run/media/root/study/repository/HurryHungry/main.cpp"
     ],
-    "directory": "/root/open_project/HurryHungry/HurryHungry/.qtc_clangd",
-    "file": "/root/open_project/HurryHungry/HurryHungry/main.cpp"
+    "directory": "/run/media/root/study/repository/HurryHungry/.qtc_clangd",
+    "file": "/run/media/root/study/repository/HurryHungry/main.cpp"
 }
 ]

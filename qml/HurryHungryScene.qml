@@ -55,7 +55,7 @@ SceneBase {
   }
 
    Keys.forwardTo: player.controller
-
+//this two is arrows in the playing_scene
    Image {
     source: "../assets/img/arrow-left.png"
     opacity: 0.5
@@ -81,7 +81,11 @@ SceneBase {
       bottomMargin: 10
     }
   }
+<<<<<<< HEAD
+//wo can use mouse to control the player move
+=======
 
+>>>>>>> 4134f1f4cfdf5f28e512def46c8c404f2e55f56c
   MouseArea {
     anchors.fill: scene.gameWindowAnchorItem
     onPressed: {

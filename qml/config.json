@@ -1,13 +1,12 @@
 {
-  "title": "ChickenOutbreak Dev",
-  "identifier": "net.vplay.demos.ChickenOutbreakDev",
+  "title": "HurryHungry Dev",
+  "identifier": "net.vplay.demos.HurryHungryDev",
   "orientation": "portrait",
   "versioncode": 10,
   "versionname": "1.0",
-  "author": "Felgo",
+  "author": "us",
   "stage": "test",
 
-  "plugins": [ "flurry", "facebook" ],
 
   "ios": {
     "prerendered_icon": true,

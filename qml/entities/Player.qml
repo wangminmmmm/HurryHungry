@@ -1,3 +1,5 @@
+
+
 import QtQuick 2.0
 
 import Felgo 3.0
@@ -20,7 +22,7 @@ EntityBase {
 
   property int deaths: 0
 
-  property int bonusScoreForCoin: 300
+  property int bonusScoreForCoin: 100
 
   property alias controller: twoAxisController
 

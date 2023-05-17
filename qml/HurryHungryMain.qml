@@ -37,8 +37,7 @@ GameWindow {
    gameId: 1
    secret: "ultra-strong-password"
 
-   gameNetworkView: vplayGameNetworkScene.gameNetworkView
-   facebookItem: facebook
+
    achievements: [
 
      Achievement {
@@ -110,8 +109,6 @@ GameWindow {
 
 
   }
-
-
 
 
    MainScene {

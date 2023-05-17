@@ -1,7 +1,7 @@
 import QtQuick 2.0
 import Felgo 3.0
 import "entities"
-
+//this scene is playing scene
 SceneBase {
   id: scene
 
@@ -53,7 +53,7 @@ SceneBase {
   }
 
    Keys.forwardTo: player.controller
-
+//this two is arrows in the playing_scene
    Image {
     source: "../assets/img/arrow-left.png"
     opacity: 0.5
@@ -79,6 +79,7 @@ SceneBase {
       bottomMargin: 10
     }
   }
+//wo can use mouse to control the player move
   MouseArea {
     anchors.fill: scene.gameWindowAnchorItem
     onPressed: {

@@ -59,7 +59,7 @@ Item {
 
     entityManager.createPooledEntitiesFromUrl(Qt.resolvedUrl("entities/Roost.qml"), 20);
     entityManager.createPooledEntitiesFromUrl(Qt.resolvedUrl("entities/HenhouseWindow.qml"), 5);
-    entityManager.createPooledEntitiesFromUrl(Qt.resolvedUrl("entities/Coin.qml"), 10);
+    entityManager.createPooledEntitiesFromUrl(Qt.resolvedUrl("entities/Bread.qml"), 10);
   }
 
 

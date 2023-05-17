@@ -6,7 +6,7 @@ var coinPositionModifier = 0.7*scene.gridSize
 var gridSizeHalf = scene.gridSize/2
 var newWindowTopleftPos = Qt.point(0,0)
 var roostUrl = Qt.resolvedUrl("../entities/Roost.qml")
-var coinUrl = Qt.resolvedUrl("../entities/Coin.qml")
+var coinUrl = Qt.resolvedUrl("../entities/Bread.qml")
 var windowUrl = Qt.resolvedUrl("../entities/HenhouseWindow.qml")
 var newElementProperties = {}
 

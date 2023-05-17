@@ -1,6 +1,6 @@
 import QtQuick 2.0
 import Felgo 3.0
-
+//button->creditsScene  show this SCene
 SceneBase {
 
   onBackButtonPressed: {

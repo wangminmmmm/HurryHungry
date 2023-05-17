@@ -90,7 +90,7 @@ EntityBase {
       var body = fixture.getBody()
       var collidedEntity = body.target;
       var collidedEntityType = collidedEntity.entityType;
-      if(collidedEntityType === "coin") {        
+      if(collidedEntityType === "bread") {
         collidedEntity.removeEntity();
 
         bonusScore++;

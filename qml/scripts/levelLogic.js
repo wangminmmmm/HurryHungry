@@ -19,27 +19,6 @@ function createRandomRowForRowNumber(rowNumber) {
             newRoostCenterPos.x = i*gridSize + gridSizeHalf
             newRoostCenterPos.y = rowNumber*gridSize + gridSizeHalf
 
-            if(physicsWorld.bodyAt(newRoostCenterPos)) {
-                console.debug("no Roost can be created because there is a window already");
-                continue;
-            }
-
-            console.debug("creating a new Roost at position", i*gridSize + gridSize/2, ",", rowNumber*gridSize + gridSize/2);
-
-
-            newElementProperties.x = newRoostCenterPos.x
-            newElementProperties.y = newRoostCenterPos.y
-            entityManager.createEntityFromUrlWithProperties(roostUrl,newElementProperties)
-
-
-            randomValue = Math.random()
-            if(randomValue < coinCreationPropability) {
-
-
-                coinCenterPos.x = newRoostCenterPos.x
-                coinCenterPos.y = newRoostCenterPos.y-scene.gridSize
-
-
                 if(physicsWorld.bodyAt(coinCenterPos)) {
                     console.debug("there is a block above the to create block, don't create a coin here!")
                     continue;
@@ -64,7 +43,6 @@ function createRandomRowForRowNumber(rowNumber) {
                 continue;
             }
 
-            // this might happen if a window was already created at this position
             if(physicsWorld.bodyAt(newWindowTopleftPos)) {
                 console.debug("body at position x:", newWindowTopleftPos.x, ", y:", newWindowTopleftPos.y, physicsWorld.bodyAt(newWindowTopleftPos))
                 console.debug("there is a window at the position where to create a window, so no creation is done");

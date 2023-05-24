@@ -13,9 +13,7 @@ int main(int argc, char *argv[])
   QQmlApplicationEngine engine;
   felgo.initialize(&engine);
 
-
-  felgo.setMainQmlFileName(QStringLiteral("qml/HunrryHungryMain.qml"));
-
+  felgo.setMainQmlFileName(QStringLiteral("qml/HurryHungryMain.qml"));
 
   engine.load(QUrl(felgo.mainQmlFileName()));
 

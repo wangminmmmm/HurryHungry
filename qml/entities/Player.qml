@@ -1,5 +1,3 @@
-
-
 import QtQuick 2.0
 
 import Felgo 3.0
@@ -14,15 +12,12 @@ EntityBase {
 
   signal died
 
-  property int score: 0
-
+  property int score: 0                    //初始值
   property int bonusScore: 0
-
-  property int totalScore: score + (bonusScore * bonusScoreForCoin)
+  property int totalScore: score + (bonusScore * bonusScoreForBread)
 
   property int deaths: 0
-
-  property int bonusScoreForCoin: 100
+  property int bonusScoreForBread: 100
 
   property alias controller: twoAxisController
 
@@ -32,16 +27,14 @@ EntityBase {
   property real leftValue: -rightValue
 
   property bool __isJumping: true
-
   property date lastJumpTime: new Date
-
   property bool __isLookingRight: true
 
   onRightValueChanged: console.debug("rightValue changed to", rightValue)
 
   preventFromRemovalFromEntityManager: true
 
-  Image {
+  Image {           //人物站立
     id: sprite
     source: "../../assets/img/stand.png"
     anchors.centerIn: parent
@@ -50,7 +43,8 @@ EntityBase {
     height: 35
     visible: false
   }
-  Image {
+
+  Image {            //人物左移
     id: spriteMovement
     source: "../../assets/img/left1.png"
     anchors.centerIn: parent
@@ -59,13 +53,13 @@ EntityBase {
     height: sprite.height
     visible: false
   }
-  Image {
+
+  Image {            //人物下滑
     id: spriteFlying
     source: "../../assets/img/down.png"
     anchors.centerIn: parent
     width: 45
     height: 45
-
     visible: false
   }
 
@@ -81,7 +75,6 @@ EntityBase {
     friction: 0.6
 
     restitution: 0
-
 
     sleepingAllowed: false
 
@@ -115,9 +108,9 @@ EntityBase {
     }
   }
 
-  SoundEffect {
+  SoundEffect {           //人物触碰面包声音
     id: coinSound
-    source: "../../assets/snd/pling.wav"
+    source: "../../assets/snd/eat.wav"
   }
 
   TwoAxisController {
@@ -132,7 +125,7 @@ EntityBase {
     }
   }
 
-  Timer {
+  Timer {                     //时间限制
     id: updateTimer
     interval: 60
     running: true
@@ -146,7 +139,7 @@ EntityBase {
     }
   }
 
-  state: {
+  state: {                 //fly状态
     if(blockCollisions==0)
       return "fly";
     else {
@@ -157,7 +150,7 @@ EntityBase {
     }
   }
 
-  states: [
+  states: [              //人物状态转换
     State {
       name: ""
       PropertyChanges { target: sprite; visible: true }

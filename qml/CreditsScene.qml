@@ -75,19 +75,6 @@ SceneBase {
         MenuText {
           text: qsTr("Source code available with")
         }
-        /*Item {
-          width: parent.width
-          height: vplayLogo.height
-          Image {
-            id: vplayLogo
-            anchors.horizontalCenter: parent.horizontalCenter
-            source: "../assets/img/felgo.png"
-
-            fillMode: Image.PreserveAspectFit
-            height: 50
-          }*/
-        }
-
 
         MenuText {
           text: qsTr("Build your own game in minutes!")
@@ -102,8 +89,6 @@ SceneBase {
         }
       }
     }
-
-
   }
 
 

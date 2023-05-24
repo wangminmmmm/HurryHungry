@@ -13,6 +13,7 @@ SceneBase {
   }
 
 
+
   MultiResolutionImage {
     source: "../assets/img/mainMenuBackground.png"
     anchors.centerIn: parent

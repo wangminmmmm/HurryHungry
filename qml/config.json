@@ -1,8 +1,6 @@
 {
-
-  "title": "HunrryHungry Dev",
-  "identifier": "net.vplay.demos.HunrryHungryDev",
-
+  "title": "HurryHungry Dev",
+  "identifier": "net.vplay.demos.HurryHungryDev",
   "orientation": "portrait",
   "versioncode": 10,
   "versionname": "1.0",

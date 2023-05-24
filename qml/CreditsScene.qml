@@ -75,7 +75,7 @@ SceneBase {
         MenuText {
           text: qsTr("Source code available with")
         }
-        Item {
+        /*Item {
           width: parent.width
           height: vplayLogo.height
           Image {
@@ -85,7 +85,7 @@ SceneBase {
 
             fillMode: Image.PreserveAspectFit
             height: 50
-          }
+          }*/
         }
 
 

@@ -6,19 +6,16 @@ var coinPositionModifier = 0.7*scene.gridSize
 var gridSizeHalf = scene.gridSize/2
 var newWindowTopleftPos = Qt.point(0,0)
 var roostUrl = Qt.resolvedUrl("../entities/Roost.qml")
-var coinUrl = Qt.resolvedUrl("../entities/Coin.qml")
+var coinUrl = Qt.resolvedUrl("../entities/Bread.qml")
 
 var newElementProperties = {}
 
 function createRandomRowForRowNumber(rowNumber) {
     for(var i=0; i<roostColumns; i++) {
-        // Performance optimization, do not create own values for mathrandom during runtime (garbarge)
-        //if(Math.random() < platformCreationProbability ) {
+
         randomValue = Math.random()
         if(randomValue < platformCreationProbability ) {
 
-            // Performance optimization, do not recreate objects during runtime (garbarge)
-            //var newRoostCenterPos = Qt.point(i*gridSize + gridSize/2, );
             newRoostCenterPos.x = i*gridSize + gridSizeHalf
             newRoostCenterPos.y = rowNumber*gridSize + gridSizeHalf
 
@@ -29,38 +26,26 @@ function createRandomRowForRowNumber(rowNumber) {
 
             console.debug("creating a new Roost at position", i*gridSize + gridSize/2, ",", rowNumber*gridSize + gridSize/2);
 
-            // Performance optimization, do not provide properties as own object during runtime (garbarge)
-//            entityManager.createEntityFromUrlWithProperties(Qt.resolvedUrl("entities/Roost.qml"),
-//                                 {"x": newRoostCenterPos.x,
-//                                     "y": newRoostCenterPos.y
-//                                 });
+
             newElementProperties.x = newRoostCenterPos.x
             newElementProperties.y = newRoostCenterPos.y
             entityManager.createEntityFromUrlWithProperties(roostUrl,newElementProperties)
 
-            // create a coin in 30% of all created blocks
+
             randomValue = Math.random()
             if(randomValue < coinCreationPropability) {
 
-                // look at 1 grid position above
-                // Performance optimization, do not recreate objects during runtime (garbarge)
-                // var coinCenterPos = Qt.point(newRoostCenterPos.x, newRoostCenterPos.y-scene.gridSize);
+
                 coinCenterPos.x = newRoostCenterPos.x
                 coinCenterPos.y = newRoostCenterPos.y-scene.gridSize
 
-                // test if one grid above is an empty field (so if no block is built there) - if so, a coin can be created
+
                 if(physicsWorld.bodyAt(coinCenterPos)) {
                     console.debug("there is a block above the to create block, don't create a coin here!")
                     continue;
                 }
 
 
-                /*entityManager.createEntityFromUrlWithProperties*/
-                // Performance optimization, do not provide properties as own object during runtime (garbarge)
-//                entityManager.createEntityFromUrlWithProperties(Qt.resolvedUrl("entities/Coin.qml"),
-//                                     {"x": coinCenterPos.x,
-//                                         "y": coinCenterPos.y+0.7*scene.gridSize // move slightly up, so it looks better
-//                                     });
                 newElementProperties.x = coinCenterPos.x
                 newElementProperties.y = coinCenterPos.y+coinPositionModifier
                 entityManager.createEntityFromUrlWithProperties(coinUrl,newElementProperties)

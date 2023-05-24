@@ -1,6 +1,6 @@
 import QtQuick 2.0
 import Felgo 3.0
-
+//about scene
 SceneBase {
 
   onBackButtonPressed: {
@@ -15,13 +15,13 @@ SceneBase {
     source: "../assets/img/mainMenuBackground.png"
     anchors.centerIn: parent
   }
-
+//the contains of this secen
   Column {
     anchors.horizontalCenter: parent.horizontalCenter
     y: 10
 
     MenuText {
-      text: qsTr("Credits")
+      text: qsTr("About")
       font.pixelSize: 35
     }
 
@@ -31,11 +31,14 @@ SceneBase {
     }
 
     MenuText {
-      text: qsTr("Art:")
+      text: qsTr("Operator:")//it introduces the operation of this game
     }
 
     MenuText {
-      text: "Astrid Handlechner"
+      text: "mouse or arrow"
+    }
+    MenuText {
+      text: "control the black's movement"
     }
 
     Item {
@@ -44,26 +47,34 @@ SceneBase {
     }
 
     MenuText {
-      text: qsTr("Sound:")
+      text: qsTr("Context:")//it introduces the operation of this game's context
     }
 
     MenuText {
-      text: "\"Two Fat Gangsters\""
+      text: "In the bakery,a coal ball is hungry"
     }
-
     MenuText {
-      text: "(playonloop.com)"
-      MouseArea {
-        onClicked: nativeUtils.openUrl("http://playonloop.com");
-      }
+      text: "and if he doesn't eat anything"
+    }
+    MenuText {
+      text: "he will starve to death over time"
     }
 
     Item {
       width: 1
-      height: 30
+      height: 25
+    }
+
+    MenuText {
+      text: qsTr("Author:")//about author
+    }
+
+    MenuText {
+      text: "wanglingzhi zhenyuhan wangmin"
     }
 
     Item {
+<<<<<<< HEAD
       width: vplayCredits.width
       height: vplayCredits.height
 
@@ -92,7 +103,7 @@ SceneBase {
   }
 
 
-
+//this button is to back to main menu
   MenuButton {
     anchors.horizontalCenter: parent.horizontalCenter
     anchors.bottom: parent.gameWindowAnchorItem.bottom

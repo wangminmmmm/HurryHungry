@@ -2,7 +2,7 @@ import QtQuick 2.0
 
 import Felgo 3.0
 
-EntityBase {
+EntityBase {                                 //玩家角色
   entityType: "player"
 
   signal leftPressed(variant event)
@@ -12,43 +12,40 @@ EntityBase {
 
   signal died
 
-  property int score: 0
-
+  property int score: 0                          //初始值
   property int bonusScore: 0
-
-  property int totalScore: score + (bonusScore * bonusScoreForCoin)
-
+  property int totalScore: score + (bonusScore * bonusScoreForBread)
   property int deaths: 0
 
-  property int bonusScoreForCoin: 100
+  property int bonusScoreForBread: 100
 
-  property alias controller: twoAxisController
+  property alias controller: twoAxisController         //左右上下移动xy值控制
 
-  property real upValue: 550
+  property real upValue: 550                      //移动站立物 数值
   property real downValue: 5
   property real rightValue: 250
   property real leftValue: -rightValue
 
   property bool __isJumping: true
-
   property date lastJumpTime: new Date
 
   property bool __isLookingRight: true
+
 
   onRightValueChanged: console.debug("rightValue changed to", rightValue)
 
   preventFromRemovalFromEntityManager: true
 
-  Image {
+  Image {                           //站立
     id: sprite
     source: "../../assets/img/stand.png"
     anchors.centerIn: parent
-
     width: 40
     height: 35
     visible: false
   }
-  Image {
+
+  Image {                           //左移   右相反
     id: spriteMovement
     source: "../../assets/img/left1.png"
     anchors.centerIn: parent
@@ -57,7 +54,7 @@ EntityBase {
     height: sprite.height
     visible: false
   }
-  Image {
+  Image {                           //上移
     id: spriteFlying
     source: "../../assets/img/down.png"
     anchors.centerIn: parent
@@ -66,12 +63,12 @@ EntityBase {
     visible: false
   }
 
-  property int blockCollisions: 0
+  property int blockCollisions: 0              //块的碰撞数值
 
-  BoxCollider {
+  BoxCollider {                        //块碰撞
     id: collider
     bodyType: Body.Dynamic
-    fixedRotation: true
+    fixedRotation: true                //旋转
 
     linearDamping: 5.0
 
@@ -93,8 +90,8 @@ EntityBase {
 
         bonusScore++;
 
-        coinSound.play()
-      } else if(collidedEntityType === "roost") {
+        breadSound.play()
+      } else if(collidedEntityType === "support") {
         blockCollisions++;
       }
     }
@@ -105,27 +102,40 @@ EntityBase {
       var body = fixture.getBody();
       var collidedEntity = body.target;
       var collidedEntityType = collidedEntity.entityType;
-      if(collidedEntityType === "roost") {
+      if(collidedEntityType === "support") {
         blockCollisions--;
       }
     }
   }
 
-  SoundEffect {
-    id: coinSound
+
+  SoundEffect {                        //吃面包声音
+    id: breadSound
     source: "../../assets/snd/eat.wav"
   }
 
+
+
+  //移动实体的 x值和y值     根据键盘按下左右 TowAxis控制器
   TwoAxisController {
-    id: twoAxisController
+     id: twoAxisController
 
     onXAxisChanged: {
-      console.debug("xAxis changed to", xAxis)
+      console.debug(" x值左右移动改变 ", xAxis)
       if(xAxis>0)
         __isLookingRight = true;
       else if(xAxis<0)
         __isLookingRight = false;
     }
+
+    onYAxisChanged: {
+      console.debug(" y值上下移动改变 ", yAxis)
+      if(yAxis>0)
+        __isLookingRight = true;
+      else if(yAxis<0)
+        __isLookingRight = false;
+    }
+
   }
 
   Timer {

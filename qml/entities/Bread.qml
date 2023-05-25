@@ -7,20 +7,18 @@ EntityBase {
 
   poolingEnabled: true
 
-
   z:1
 
   Image {
     id: sprite
     source: "../../assets/img/bread.png"
-
     width: 21
     height: 20
-
     anchors.centerIn: parent
   }
 
   property alias collider: collider
+
   BoxCollider {
     id: collider
     bodyType: Body.Static

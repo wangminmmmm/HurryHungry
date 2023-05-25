@@ -57,7 +57,7 @@ Item {
     if(system.isPlatform(System.Meego) || system.isPlatform(System.Symbian))
       return;
 
-    entityManager.createPooledEntitiesFromUrl(Qt.resolvedUrl("entities/Roost.qml"), 20);
+    entityManager.createPooledEntitiesFromUrl(Qt.resolvedUrl("entities/Support.qml"), 20);
     entityManager.createPooledEntitiesFromUrl(Qt.resolvedUrl("entities/Bread.qml"), 10);
   }
 
@@ -103,7 +103,7 @@ Item {
     z: 1
   }
 
-  Roost {
+  Support {
     id: lowerBlock
     entityId: "playerInitialBlock"
     x: scene.width/2

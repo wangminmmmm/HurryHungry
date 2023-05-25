@@ -1,16 +1,16 @@
 import QtQuick 2.0
 import Felgo 3.0
  EntityBase {
-  entityType: "roost"
+  entityType: "support"
   poolingEnabled: true
   z:1
 
-  Component.onCompleted: console.debug("Roost.onCompleted()")
-  Component.onDestruction: console.debug("Roost.onDestruction()")
+  Component.onCompleted: console.debug("Support.onCompleted()")
+  Component.onDestruction: console.debug("Support.onDestruction()")
 
   Image {
     id: sprite
-    source: "../../assets/img/roost_higher.png"
+    source: "../../assets/img/support.png"
 
     width: level.gridSize
     height: 8

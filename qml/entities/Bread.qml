@@ -1,13 +1,9 @@
 import QtQuick 2.0
 import Felgo 3.0
 
-
 EntityBase {
   entityType: "bread"
-
   poolingEnabled: true
-
-
   z:1
 
   Image {

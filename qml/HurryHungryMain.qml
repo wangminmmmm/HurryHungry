@@ -21,7 +21,7 @@ GameWindow {
 
   BackgroundMusic {
     id: backgroundMusic
-    source: "../assets/snd/bg-slow.wav"
+    source: "../assets/snd/bgm.wav"
      autoPlay: true
   }
 

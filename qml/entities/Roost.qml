@@ -2,10 +2,8 @@ import QtQuick 2.0
 import Felgo 3.0
  EntityBase {
   entityType: "roost"
-
   poolingEnabled: true
-
-   z:1
+  z:1
 
   Component.onCompleted: console.debug("Roost.onCompleted()")
   Component.onDestruction: console.debug("Roost.onDestruction()")

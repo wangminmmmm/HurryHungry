@@ -1,5 +1,3 @@
-
-
 import QtQuick 2.0
 
 import Felgo 3.0
@@ -65,7 +63,6 @@ EntityBase {
     anchors.centerIn: parent
     width: 45
     height: 45
-
     visible: false
   }
 
@@ -81,7 +78,6 @@ EntityBase {
     friction: 0.6
 
     restitution: 0
-
 
     sleepingAllowed: false
 
@@ -117,7 +113,7 @@ EntityBase {
 
   SoundEffect {
     id: coinSound
-    source: "../../assets/snd/pling.wav"
+    source: "../../assets/snd/eat.wav"
   }
 
   TwoAxisController {

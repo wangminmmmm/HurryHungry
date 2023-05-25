@@ -67,7 +67,7 @@ SceneBase {
 
 
     MenuButton {
-      text: qsTr("About")
+      text: qsTr("Credits")
 
       width: 170 * 0.8
       height: 60 * 0.8

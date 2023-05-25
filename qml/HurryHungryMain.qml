@@ -25,7 +25,7 @@ GameWindow {
      autoPlay: true
   }
 
-  FontLoader {
+  FontLoader {                     //字体加载器
     id: fontHUD
     source: "fonts/pf_tempesta_seven_compressed.ttf"
   }

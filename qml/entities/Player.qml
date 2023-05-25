@@ -2,7 +2,9 @@ import QtQuick 2.0
 
 import Felgo 3.0
 
-EntityBase {                                 //玩家角色
+//玩家 个体控制
+
+EntityBase {                                  //玩家角色
   entityType: "player"
 
   signal leftPressed(variant event)
@@ -12,31 +14,30 @@ EntityBase {                                 //玩家角色
 
   signal died
 
-  property int score: 0                          //初始值
+  property int score: 0                 //玩家初始值
   property int bonusScore: 0
   property int totalScore: score + (bonusScore * bonusScoreForBread)
   property int deaths: 0
 
   property int bonusScoreForBread: 100
 
-  property alias controller: twoAxisController         //左右上下移动xy值控制
+  property alias controller: twoAxisController        //左右上下移动xy值 控制 组件
 
-  property real upValue: 550                      //移动站立物 数值
-  property real downValue: 5
-  property real rightValue: 250
+  property real upValue: 5                   //上下移动速率 timer
+  property real downValue: 10
+  property real rightValue: 200               //左右移动速率 timer
   property real leftValue: -rightValue
 
   property bool __isJumping: true
   property date lastJumpTime: new Date
-
   property bool __isLookingRight: true
 
 
-  onRightValueChanged: console.debug("rightValue changed to", rightValue)
+  onRightValueChanged: console.debug("右移到", rightValue)
 
-  preventFromRemovalFromEntityManager: true
+  preventFromRemovalFromEntityManager: true       //管理玩家 实体不被破坏
 
-  Image {                           //站立
+  Image {                            //站立
     id: sprite
     source: "../../assets/img/stand.png"
     anchors.centerIn: parent
@@ -44,8 +45,7 @@ EntityBase {                                 //玩家角色
     height: 35
     visible: false
   }
-
-  Image {                           //左移   右相反
+  Image {                            //左移   右相反
     id: spriteMovement
     source: "../../assets/img/left1.png"
     anchors.centerIn: parent
@@ -54,7 +54,7 @@ EntityBase {                                 //玩家角色
     height: sprite.height
     visible: false
   }
-  Image {                           //上移
+  Image {                            //下移
     id: spriteFlying
     source: "../../assets/img/down.png"
     anchors.centerIn: parent
@@ -62,21 +62,27 @@ EntityBase {                                 //玩家角色
     height: 45
     visible: false
   }
+  Image {                            //上移
+    id: spriteDowning
+    source: "../../assets/img/fly.png"
+    anchors.centerIn: parent
+    width: 45
+    height: 45
+    visible: false
+  }
 
-  property int blockCollisions: 0              //块的碰撞数值
+  property int blockCollisions: 0              //当下块的碰撞数值-> 判断玩家下降
 
-  BoxCollider {                        //块碰撞
+  BoxCollider {                               //块碰撞检测
     id: collider
     bodyType: Body.Dynamic
-    fixedRotation: true                //旋转
+    fixedRotation: true                       //不让使其旋转
 
-    linearDamping: 5.0
-
+    linearDamping: 5.0           //在支撑物上 降低玩家限速 与摩差力一起使用
     friction: 0.6
 
-    restitution: 0
-
-    sleepingAllowed: false
+    restitution: 0              //使碰撞物不会反弹
+    sleepingAllowed: false       //当没有碰撞时进入隨眠状态
 
     anchors.fill: sprite
 
@@ -85,31 +91,32 @@ EntityBase {                                 //玩家角色
       var body = fixture.getBody()
       var collidedEntity = body.target;
       var collidedEntityType = collidedEntity.entityType;
-      if(collidedEntityType === "bread") {
+
+      if(collidedEntityType === "bread") {    //检测被撞物
         collidedEntity.removeEntity();
-
         bonusScore++;
-
         breadSound.play()
-      } else if(collidedEntityType === "support") {
+      }
+      else if(collidedEntityType === "support") {
         blockCollisions++;
       }
     }
 
     fixture.onEndContact: {
-
       var fixture = other;
       var body = fixture.getBody();
       var collidedEntity = body.target;
       var collidedEntityType = collidedEntity.entityType;
+
       if(collidedEntityType === "support") {
         blockCollisions--;
       }
     }
+
   }
 
 
-  SoundEffect {                        //吃面包声音
+  SoundEffect {                         //吃面包声音
     id: breadSound
     source: "../../assets/snd/eat.wav"
   }
@@ -121,7 +128,7 @@ EntityBase {                                 //玩家角色
      id: twoAxisController
 
     onXAxisChanged: {
-      console.debug(" x值左右移动改变 ", xAxis)
+      console.debug(" x值左右 移动改变 ", xAxis)
       if(xAxis>0)
         __isLookingRight = true;
       else if(xAxis<0)
@@ -129,51 +136,67 @@ EntityBase {                                 //玩家角色
     }
 
     onYAxisChanged: {
-      console.debug(" y值上下移动改变 ", yAxis)
+      console.debug(" y值上下 移动改变 ", yAxis)
       if(yAxis>0)
-        __isLookingRight = true;
+        __isJumping = true;
       else if(yAxis<0)
-        __isLookingRight = false;
+        __isJumping = false;
     }
 
   }
 
-  Timer {
+  Timer {                 //用于玩家左右移动计时 速度
     id: updateTimer
     interval: 60
-    running: true
+    running: true            //启动记时器
     repeat: true
-    onTriggered: {
 
+    onTriggered: {                  // x和y值改变值根据 属性设置的速率
       var xAxis = controller.xAxis;
       if(xAxis) {
         collider.body.linearVelocity.x = xAxis*rightValue;
       }
+
+      var yAxis = controller.yAxis;
+      if(yAxis) {
+        collider.body.linearVelocity.x = yAxis*upValue;
+      }
     }
+
   }
 
-  state: {
-    if(blockCollisions==0)
-      return "fly";
+  state: {                               //状态转换
+    if(blockCollisions==0)     //支撑物为0时
+          return "fly";
+
+    if(controller.yAxis >0)
+        return "down";
+
     else {
       if(controller.xAxis !== 0) {
         return "moveLeftRight";
       }
       return "";
     }
+
   }
 
   states: [
     State {
-      name: ""
+      name: ""         //站立状态
       PropertyChanges { target: sprite; visible: true }
     },
     State {
-      name: "fly"
+      name: "fly"       //下降状态
       PropertyChanges { target: spriteFlying; visible: true }
     },
     State {
-      name: "moveLeftRight"
+        name: "down"    //飞翔状态（在调试
+        PropertyChanges { target: spriteDowning; visible: true }
+     },
+
+    State {
+      name: "moveLeftRight"     //左右移动
       PropertyChanges { target: spriteMovement; visible: true }
     }
   ]

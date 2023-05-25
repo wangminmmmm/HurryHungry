@@ -2,7 +2,7 @@ import QtQuick 2.0
 import Felgo 3.0
 import "entities"
 
-//游戏场景
+//正在游戏场景 游戏内场景
 
 SceneBase {
   id: scene
@@ -12,35 +12,38 @@ SceneBase {
   property alias entityContainer: level
   gridSize: 48
 
-  sceneAlignmentY: "bottom"
+  sceneAlignmentY: "bottom"         //基于底部位置垂直
 
   onBackButtonPressed: {
     level.stopGame();
     window.state = "main"
   }
 
-    PhysicsWorld {
+    PhysicsWorld {         //物理世界组件包含所有物理实体 设置玩家 重力
     id: physicsWorld
     z: 10
 
-    updatesPerSecondForPhysics: 60
+    updatesPerSecondForPhysics: 60  //更新的频率
     gravity.y: 60
 
-    velocityIterations: 5
+    velocityIterations: 5         //迭代次数  更新
     positionIterations: 5
 
     debugDrawVisible: false
   }
 
+    //视差滚动背景使用一个多分辨率图像实例 创建无限的可滚动背景
   ParallaxScrollingBackground {
     id: levelBackground
     anchors.horizontalCenter: parent.horizontalCenter
     y: parent.height-parent.gameWindowAnchorItem.height
     sourceImage: "../assets/img/background-pure.png"
+
     mirrorSecondImage: false
     movementVelocity: Qt.point(0, level.levelMovementAnimation.velocity)
     running: level.levelMovementAnimation.running
   }
+
 
   Level {
     id: level
@@ -52,11 +55,13 @@ SceneBase {
       player.deaths++;
        window.state = "gameOver"
     }
+
   }
 
-   Keys.forwardTo: player.controller
 
-   Image {
+   Keys.forwardTo: player.controller        //for 鼠标控制玩家 mousearea 移动x y值
+
+   Image {                            //鼠标点击 控制人物角色左右移动 照片
     source: "../assets/img/arrow-left.png"
     opacity: 0.5
     width: 48
@@ -68,12 +73,13 @@ SceneBase {
       bottomMargin: 10
     }
   }
-  Image {
+
+   Image {
     source: "../assets/img/arrow-left.png"
     opacity: 0.5
     width: 48
     height: 48
-    mirror: true
+    mirror: true                  //左右镜相翻转
     anchors {
       right: scene.gameWindowAnchorItem.right
       bottom: scene.gameWindowAnchorItem.bottom
@@ -82,8 +88,9 @@ SceneBase {
     }
   }
 
-  MouseArea {
+   MouseArea {                         //鼠标控制组件
     anchors.fill: scene.gameWindowAnchorItem
+
     onPressed: {
       console.debug("onPressed, mouseX", mouseX)
       if(mouseX > scene.gameWindowAnchorItem.width/2)
@@ -91,6 +98,7 @@ SceneBase {
       else
         player.controller.xAxis = -1;
     }
+
     onPositionChanged: {
       if(mouseX > scene.gameWindowAnchorItem.width/2)
         player.controller.xAxis = 1;
@@ -100,64 +108,24 @@ SceneBase {
     onReleased: player.controller.xAxis = 0
   }
 
-  Text {
+
+
+  Text {                                //当前实时得分
     x: 5
-     anchors.top: scene.gameWindowAnchorItem.top
+    anchors.top: scene.gameWindowAnchorItem.top
     anchors.topMargin: 5
 
-    text: qsTr("Score: ") + player.totalScore
+    text: qsTr("Score: ") + player.totalScore   //分数显示
     font.family: fontHUD.name
     font.pixelSize: 22
     color: "white"
+
   }
-  function enterScene() {
+
+
+   function enterScene() {
     level.startGame();
   }
 
 
- SimpleButton {
-    id: hud
-    width: 64
-    height: 64
-    anchors.top: scene.gameWindowAnchorItem.top
-    anchors.right: scene.gameWindowAnchorItem.right
-    visible: system.debugBuild
-    text: "Menu"
-    onClicked: {
-      console.debug("Menu button clicked")
-
-      scene.state = "ingameMenu"
-    }
-  }
-
-  IngameMenu {
-    id: ingameMenu
-
-    visible: false
-    anchors.centerIn: parent
-  }
-
-  onStateChanged: console.debug("Scene.state changed to", state)
-  states: [
-    State {
-      name: ""
-      StateChangeScript {
-        script: {
-          console.debug("scene: entered state ''")
-          level.resumeGame();
-        }
-      }
-    },
-    State {
-      name: "ingameMenu"
-      PropertyChanges { target: ingameMenu; visible: true}
-      StateChangeScript {
-        script: {
-          console.debug("scene: entered state 'ingameMenu'")
-          level.pauseGame();
-        }
-      }
-    }
-
-  ]
 }

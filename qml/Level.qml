@@ -11,7 +11,7 @@ Item {
 
    property real gridSize: scene.gridSize
 
-   property int supportColumns: width/gridSize
+   property int roostColumns: width/gridSize
 
    property real lastY: 0
 
@@ -57,7 +57,7 @@ Item {
     if(system.isPlatform(System.Meego) || system.isPlatform(System.Symbian))
       return;
 
-    entityManager.createPooledEntitiesFromUrl(Qt.resolvedUrl("entities/Support.qml"), 20);
+    entityManager.createPooledEntitiesFromUrl(Qt.resolvedUrl("entities/Roost.qml"), 20);
     entityManager.createPooledEntitiesFromUrl(Qt.resolvedUrl("entities/Bread.qml"), 10);
   }
 
@@ -103,7 +103,7 @@ Item {
     z: 1
   }
 
-  Support {
+  Roost {
     id: lowerBlock
     entityId: "playerInitialBlock"
     x: scene.width/2
@@ -177,8 +177,7 @@ Item {
         player.score = currentScore
     }
   }
-
-  //调试
+  // ------------------- for debugging only ------------------- //
   function pauseGame() {
     console.debug("pauseGame()")
     levelMovementAnimation.stop();

@@ -12,12 +12,15 @@ EntityBase {
 
   signal died
 
-  property int score: 0                    //初始值
+  property int score: 0
+
   property int bonusScore: 0
-  property int totalScore: score + (bonusScore * bonusScoreForBread)
+
+  property int totalScore: score + (bonusScore * bonusScoreForCoin)
 
   property int deaths: 0
-  property int bonusScoreForBread: 100
+
+  property int bonusScoreForCoin: 100
 
   property alias controller: twoAxisController
 
@@ -27,14 +30,16 @@ EntityBase {
   property real leftValue: -rightValue
 
   property bool __isJumping: true
+
   property date lastJumpTime: new Date
+
   property bool __isLookingRight: true
 
   onRightValueChanged: console.debug("rightValue changed to", rightValue)
 
   preventFromRemovalFromEntityManager: true
 
-  Image {           //人物站立
+  Image {
     id: sprite
     source: "../../assets/img/stand.png"
     anchors.centerIn: parent
@@ -43,8 +48,7 @@ EntityBase {
     height: 35
     visible: false
   }
-
-  Image {            //人物左移
+  Image {
     id: spriteMovement
     source: "../../assets/img/left1.png"
     anchors.centerIn: parent
@@ -53,8 +57,7 @@ EntityBase {
     height: sprite.height
     visible: false
   }
-
-  Image {            //人物下滑
+  Image {
     id: spriteFlying
     source: "../../assets/img/down.png"
     anchors.centerIn: parent
@@ -108,7 +111,7 @@ EntityBase {
     }
   }
 
-  SoundEffect {           //人物触碰面包声音
+  SoundEffect {
     id: coinSound
     source: "../../assets/snd/eat.wav"
   }
@@ -125,7 +128,7 @@ EntityBase {
     }
   }
 
-  Timer {                     //时间限制
+  Timer {
     id: updateTimer
     interval: 60
     running: true
@@ -139,7 +142,7 @@ EntityBase {
     }
   }
 
-  state: {                 //fly状态
+  state: {
     if(blockCollisions==0)
       return "fly";
     else {
@@ -150,7 +153,7 @@ EntityBase {
     }
   }
 
-  states: [              //人物状态转换
+  states: [
     State {
       name: ""
       PropertyChanges { target: sprite; visible: true }

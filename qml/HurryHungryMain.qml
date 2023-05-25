@@ -19,7 +19,7 @@ GameWindow {
 
   }
 
-  BackgroundMusic {               //背景音乐
+  BackgroundMusic {
     id: backgroundMusic
     source: "../assets/snd/bgm.wav"
      autoPlay: true
@@ -157,7 +157,7 @@ GameWindow {
     lastActiveState = state;
   }
 
-  state: "main"                    //场景状态
+  state: "main"                 //场景状态
    states: [
     State {
       name: "main"

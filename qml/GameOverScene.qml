@@ -23,8 +23,8 @@ SceneBase {
     source: "../assets/img/dead1.png"
   }
 
-
   MenuText {
+    id:gameover
     y: 40
     text: qsTr("Game Over")
     font.pixelSize: 35
@@ -47,11 +47,21 @@ SceneBase {
   }
 
   MenuButton {
+    id:restart
     anchors.bottom: parent.bottom
     anchors.bottomMargin: 30
     text: qsTr("Continue")
-    onClicked: window.state = "main"
+    onClicked: {
+        backgroundMusic.play();
+        window.state = "main";
+    }
   }
+
+  SoundEffect {
+    id: gameoverSound
+    source: "../assets/snd/lose.wav"
+  }
+
 
   function enterScene() {
 
@@ -73,9 +83,13 @@ SceneBase {
     } if (grains >= 50) {
       gameNetwork.unlockAchievement("grains50", true)
     } if (deaths >= 10){
-      gameNetwork.unlockAchievement("blackdead", true)
+      gameNetwork.unlockAchievement("blackdead", true);
     }
 
+    if(player.deaths){
+        backgroundMusic.stop();
+        gameoverSound.play();
+    }
 
     console.log("Player's death count:", deaths);
   }

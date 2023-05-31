@@ -5,7 +5,7 @@ var coinCenterPos = Qt.point(0,0)
 var coinPositionModifier = 0.7*scene.gridSize
 var gridSizeHalf = scene.gridSize/2
 var newWindowTopleftPos = Qt.point(0,0)
-var roostUrl = Qt.resolvedUrl("../entities/Roost.qml")
+var roostUrl = Qt.resolvedUrl("../entities/Support.qml")
 var coinUrl = Qt.resolvedUrl("../entities/Bread.qml")
 
 var newElementProperties = {}
@@ -70,7 +70,7 @@ function createRandomRowForRowNumber(rowNumber) {
 
             newElementProperties.x = newWindowTopleftPos.x
             newElementProperties.y = newWindowTopleftPos.y
-            newElementProperties.z = 0 // put behind all others, except the background
+            newElementProperties.z = 0
             entityManager.createEntityFromUrlWithProperties(windowUrl,newElementProperties)
 
             lastWindowY = newWindowTopleftPos.y;

@@ -22,10 +22,10 @@ GameWindow {
   BackgroundMusic {
     id: backgroundMusic
     source: "../assets/snd/bgm.wav"
-     autoPlay: true
+    autoPlay: true
   }
 
-  FontLoader {
+  FontLoader {                     //字体加载器
     id: fontHUD
     source: "fonts/pf_tempesta_seven_compressed.ttf"
   }

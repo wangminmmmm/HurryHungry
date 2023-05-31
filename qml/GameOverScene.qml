@@ -53,6 +53,12 @@ SceneBase {
     onClicked: window.state = "main"
   }
 
+  SoundEffect {
+    id: gameoverSound
+    source: "../assets/snd/lose.wav"
+  }
+
+
   function enterScene() {
 
     if(lastScore > maximumHighscore) {
@@ -73,9 +79,13 @@ SceneBase {
     } if (grains >= 50) {
       gameNetwork.unlockAchievement("grains50", true)
     } if (deaths >= 10){
-      gameNetwork.unlockAchievement("blackdead", true)
+      gameNetwork.unlockAchievement("blackdead", true);
     }
 
+    if(player.deaths){
+        backgroundMusic.stop();
+        gameoverSound.play();
+    }
 
     console.log("Player's death count:", deaths);
   }

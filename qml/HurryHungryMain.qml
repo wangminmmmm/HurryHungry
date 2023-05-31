@@ -22,7 +22,7 @@ GameWindow {
   BackgroundMusic {
     id: backgroundMusic
     source: "../assets/snd/bgm.wav"
-     autoPlay: true
+    autoPlay: true
   }
 
   FontLoader {                     //字体加载器

@@ -23,8 +23,8 @@ SceneBase {
     source: "../assets/img/dead1.png"
   }
 
-
   MenuText {
+    id:gameover
     y: 40
     text: qsTr("Game Over")
     font.pixelSize: 35
@@ -47,10 +47,14 @@ SceneBase {
   }
 
   MenuButton {
+    id:restart
     anchors.bottom: parent.bottom
     anchors.bottomMargin: 30
     text: qsTr("Continue")
-    onClicked: window.state = "main"
+    onClicked: {
+        backgroundMusic.play();
+        window.state = "main";
+    }
   }
 
   SoundEffect {

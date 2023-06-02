@@ -6,12 +6,12 @@ import "scripts/levelLogic.js" as LevelLogic
 
 Item {
   id: level
-  width: scene.width
-  height: scene.height
+  width: scene.width //350
+  height: scene.height//500
 
-   property real gridSize: scene.gridSize
+   property real gridSize: scene.gridSize//make scecn grids 48
 
-   property int roostColumns: width/gridSize
+   property int roostColumns: width/gridSize  //stand's number is 350/48
 
    property real lastY: 0
 
@@ -21,7 +21,7 @@ Item {
 
   property alias levelMovementAnimation: levelMovementAnimation
 
-  property real levelMovementSpeedMinimum: 20
+  property real levelMovementSpeedMinimum: 20//max and mini speed
   property real levelMovementSpeedMaximum: 90
 
   property int levelMovementDurationTillMaximum: 30
@@ -45,14 +45,14 @@ Item {
 
   signal gameLost
 
-  Component.onCompleted: {
+  Component.onCompleted: {//when you game is starting then going creating
 
     preCreateEntityPool();
 
 
   }
 
-  function preCreateEntityPool() {
+  function preCreateEntityPool() {//create entitys
 
     if(system.isPlatform(System.Meego) || system.isPlatform(System.Symbian))
       return;
@@ -62,25 +62,25 @@ Item {
   }
 
 
-  function stopGame() {
+  function stopGame() {//game over
     levelMovementAnimation.stop();
 
      entityManager.removeAllEntities();
   }
 
-  function startGame() {
+  function startGame() {//game start
     console.debug("Level: startGame()");
 
     currentRow = 0;
     lastY = 0;
 
-    level.y = 0;    
+    level.y = 0;    //stand
 
     player.x = scene.width/2;
     player.y = 2*gridSize;
 
     player.score = 0;
-    player.bonusScore = 0;
+    player.bonusScore = 0;//get bread score
 
     player.controller.xAxis = 0;
 
@@ -111,7 +111,7 @@ Item {
     preventFromRemovalFromEntityManager: true
   }
 
-
+//top border and bottom border if player collide then game over
   BorderRegion {
     x: scene.gameWindowAnchorItem.x
     width: 2*scene.gameWindowAnchorItem.width
@@ -145,16 +145,16 @@ Item {
   MovementAnimation {
     id: levelMovementAnimation
     property: "y"
-    velocity: -levelMovementSpeedMinimum
+    velocity: -levelMovementSpeedMinimum//- is top and up
 
-    acceleration: -(levelMovementSpeedMaximum-levelMovementSpeedMinimum) / levelMovementDurationTillMaximum
+    acceleration: -(levelMovementSpeedMaximum-levelMovementSpeedMinimum) / levelMovementDurationTillMaximum//jia speed
     target: level
 
 
     minVelocity: -levelMovementSpeedMaximum
   }
 
-  onYChanged: {
+  onYChanged: {//by y'change to create rows and calculate score
 
     var dy = y - lastY;
     if(-dy > gridSize) {
@@ -163,7 +163,7 @@ Item {
       console.debug(amountNewRows, "new rows are getting created...")
 
 
-      for(var i=0; i<amountNewRows; i++) {
+      for(var i=0; i<amountNewRows; i++) {//use y'long to calculate score
         currentRow++;
 
         LevelLogic.createRandomRowForRowNumber(currentRow+rowCount);

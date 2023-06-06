@@ -36,6 +36,7 @@ SceneBase {
     text: qsTr("Your score: ") + lastScore
   }
 
+  //a new highscore tips
   MenuText {
     id: newMaximumHighscore
     text: qsTr("New highscore!!!")
@@ -47,7 +48,6 @@ SceneBase {
   }
 
   MenuButton {
-    id:restart
     anchors.bottom: parent.bottom
     anchors.bottomMargin: 30
     text: qsTr("Continue")
@@ -63,6 +63,7 @@ SceneBase {
   }
 
 
+  //the highscore record's updates and music control
   function enterScene() {
 
     if(lastScore > maximumHighscore) {

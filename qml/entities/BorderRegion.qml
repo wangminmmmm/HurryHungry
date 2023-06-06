@@ -14,7 +14,7 @@ EntityBase {
   BoxCollider {
     id: boxCollider
     bodyType: Body.Dynamic
-    collisionTestingOnlyMode: true
+    collisionTestingOnlyMode: true      //detect the target location
 
     fixture.onBeginContact: {
 
@@ -23,6 +23,7 @@ EntityBase {
       var collidedEntity = body.target;
       var collidedEntityType = collidedEntity.entityType;
 
+      //boundary detemination
       console.debug("BorderRegion: collided with entity type:", collidedEntityType);
 
       if(collidedEntityType === "player")

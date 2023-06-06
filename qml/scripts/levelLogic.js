@@ -30,7 +30,7 @@ function createRandomRowForRowNumber(rowNumber) {
 
             newElementProperties.x = newRoostCenterPos.x
             newElementProperties.y = newRoostCenterPos.y
-            entityManager.createEntityFromUrlWithProperties(roostUrl,newElementProperties)
+            entityManager.createEntityFromUrlWithProperties(roostUrl,newElementProperties)//create stand entity
 
             randomValue = Math.random()
             if(randomValue < coinCreationPropability) {
@@ -46,7 +46,7 @@ function createRandomRowForRowNumber(rowNumber) {
 
                 newElementProperties.x = coinCenterPos.x
                 newElementProperties.y = coinCenterPos.y+coinPositionModifier
-                entityManager.createEntityFromUrlWithProperties(coinUrl,newElementProperties)
+                entityManager.createEntityFromUrlWithProperties(coinUrl,newElementProperties)//create bread entity
             }
         } else if(i < roostColumns-1 && randomValue < windowCreationProbability ) {
 

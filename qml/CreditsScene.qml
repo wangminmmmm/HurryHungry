@@ -35,9 +35,11 @@ SceneBase {
     }
 
     MenuText {
+        color: "#000000"
       text: "mouse or arrow"
     }
     MenuText {
+        color: "#000000"
       text: "control the black's movement"
     }
 
@@ -51,12 +53,15 @@ SceneBase {
     }
 
     MenuText {
+        color: "#000000"
       text: "In the bakery,a coal ball is hungry"
     }
     MenuText {
+        color: "#000000"
       text: "and if he doesn't eat anything"
     }
     MenuText {
+        color: "#000000"
       text: "he will starve to death over time"
     }
 

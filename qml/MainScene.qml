@@ -6,7 +6,8 @@ SceneBase {
 
   property bool exitDialogShown: false
   property bool vplayLinkShown: false
-
+  
+  //key
   onBackButtonPressed: {
     exitDialogShown = true
     nativeUtils.displayMessageBox(qsTr("Really quit the game?"), "", 2);

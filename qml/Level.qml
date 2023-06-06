@@ -177,7 +177,7 @@ Item {
         player.score = currentScore
     }
   }
-  // ------------------- for debugging only ------------------- //
+
   function pauseGame() {
     console.debug("pauseGame()")
     levelMovementAnimation.stop();

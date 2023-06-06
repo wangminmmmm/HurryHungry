@@ -102,7 +102,7 @@ GameWindow {
    }
 
    onNewHighscore: {
-     if(!system.publishBuild) {
+     if(!system.publishBuild) {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
       nativeUtils.displayMessageBox("New highscore reached for leaderboard " + leaderboard + ": " + Math.round(highscore))
      }
    }

@@ -7,7 +7,7 @@ import Felgo 3.0
 EntityBase {                                  //玩家角色
   entityType: "player"
 
-  signal leftPressed(variant event)
+  signal leftPressed(variant event)              //检测按下信号
   signal rightPressed(variant event)
   signal upPressed(variant event)
   signal downPressed(variant event)
@@ -23,17 +23,17 @@ EntityBase {                                  //玩家角色
 
   property alias controller: twoAxisController        //左右上下移动xy值 控制 组件
 
-  property real upValue: 5                   //上下移动速率 timer
+  property real upValue: 5                    //上下移动速率 timer
   property real downValue: 10
   property real rightValue: 200               //左右移动速率 timer
   property real leftValue: -rightValue
 
-  property bool __isJumping: true
+  property bool __isJumping: true           // 定义向上/向下
   property date lastJumpTime: new Date
   property bool __isLookingRight: true
 
 
-  onRightValueChanged: console.debug("右移到", rightValue)
+  onRightValueChanged: console.debug("右移到", rightValue)   //console检测是否移动
 
   preventFromRemovalFromEntityManager: true       //管理玩家 实体不被破坏
 
@@ -71,38 +71,40 @@ EntityBase {                                  //玩家角色
     visible: false
   }
 
-  property int blockCollisions: 0              //当下块的碰撞数值-> 判断玩家下降
+  property int blockCollisions: 0              //当下块的碰撞数值-> 状态转换 判断玩家下降
 
-  BoxCollider {                               //块碰撞检测
+  BoxCollider {                               //玩家 碰撞检测
     id: collider
-    bodyType: Body.Dynamic
-    fixedRotation: true                       //不让使其旋转
+    bodyType: Body.Dynamic          //该组件必须设置的属性 设置为动态值 动态体才能发生与其他相互碰撞
 
-    linearDamping: 5.0           //在支撑物上 降低玩家限速 与摩差力一起使用
+    fixedRotation: true                    //不让使玩家 旋转
+    linearDamping: 5.0               //阻尼设置 在支撑物上 降低玩家限速 与摩差力一起使用
     friction: 0.6
 
-    restitution: 0              //使碰撞物不会反弹
-    sleepingAllowed: false       //当没有碰撞时进入隨眠状态
+    restitution: 0                   //使碰撞物后不会反弹
+    sleepingAllowed: false           //当没有碰撞时进入隨眠状态
 
     anchors.fill: sprite
 
-    fixture.onBeginContact: {
+    fixture.onBeginContact: {              //此属性访问被撞物体的刚开始 碰撞 物理形状
       var fixture = other;
       var body = fixture.getBody()
       var collidedEntity = body.target;
-      var collidedEntityType = collidedEntity.entityType;
+      var collidedEntityType = collidedEntity.entityType;   //得到被撞的具体单个 实体
 
-      if(collidedEntityType === "bread") {    //检测被撞物
-        collidedEntity.removeEntity();
+      if(collidedEntityType === "bread") {       //检测被撞物
+        collidedEntity.removeEntity();   //移除bread
         bonusScore++;
         breadSound.play()
       }
+
       else if(collidedEntityType === "support") {
         blockCollisions++;
       }
     }
 
-    fixture.onEndContact: {
+
+    fixture.onEndContact: {              //此属性访问被撞物体结束 碰撞 物理形状
       var fixture = other;
       var body = fixture.getBody();
       var collidedEntity = body.target;
@@ -116,7 +118,7 @@ EntityBase {                                  //玩家角色
   }
 
 
-  SoundEffect {                         //吃面包声音
+  SoundEffect {                             //吃面包声音
     id: breadSound
     source: "../../assets/snd/eat.wav"
   }
@@ -128,7 +130,7 @@ EntityBase {                                  //玩家角色
      id: twoAxisController
 
     onXAxisChanged: {
-      console.debug(" x值左右 移动改变 ", xAxis)
+      console.debug(" x值左右 移动改变值 ", xAxis)
       if(xAxis>0)
         __isLookingRight = true;
       else if(xAxis<0)
@@ -136,7 +138,7 @@ EntityBase {                                  //玩家角色
     }
 
     onYAxisChanged: {
-      console.debug(" y值上下 移动改变 ", yAxis)
+      console.debug(" y值上下 移动改变值 ", yAxis)
       if(yAxis>0)
         __isJumping = true;
       else if(yAxis<0)
@@ -148,25 +150,26 @@ EntityBase {                                  //玩家角色
   Timer {                 //用于玩家左右移动计时 速度
     id: updateTimer
     interval: 60
-    running: true            //启动记时器
+    running: true                   //启动记时器
     repeat: true
 
     onTriggered: {                  // x和y值改变值根据 属性设置的速率
       var xAxis = controller.xAxis;
       if(xAxis) {
-        collider.body.linearVelocity.x = xAxis*rightValue;
+        collider.body.linearVelocity.x = xAxis* rightValue;       //移动的x值*定义的速率  以像素/s为单位
       }
 
       var yAxis = controller.yAxis;
       if(yAxis) {
-        collider.body.linearVelocity.x = yAxis*upValue;
+        collider.body.linearVelocity.x = yAxis* upValue;
       }
     }
 
   }
 
+
   state: {                               //状态转换
-    if(blockCollisions==0)     //支撑物为0时
+    if(blockCollisions==0)       //支撑物为0时
           return "fly";
 
     if(controller.yAxis >0)
